@@ -1,0 +1,61 @@
+{
+  "name": "dsh-eye-care",
+  "version": "1.0.0",
+  "description": "DeepSeek Harness eye-care reminder: prompts you at a configurable interval to look into the distance for 20 seconds, with a smooth progress ring, four accent colors, and a General settings row. 护眼提醒：按设定的间隔提醒你看远处 20 秒，缓解长时间盯屏带来的眼部疲劳。",
+  "type": "module",
+  "license": "MIT",
+  "author": {
+    "name": "LvenxjY",
+    "url": "https://github.com/LvenxjY"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LvenxjY/dsh-eye-care.git"
+  },
+  "homepage": "https://github.com/LvenxjY/dsh-eye-care#readme",
+  "bugs": {
+    "url": "https://github.com/LvenxjY/dsh-eye-care/issues"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "cordis",
+    "eye-care",
+    "health",
+    "reminder"
+  ],
+  "engines": {
+    "node": ">=20",
+    "dsh": ">=0.2.1-rc.2 <0.3.0-0"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-settings-general"
+      ]
+    }
+  }
+}

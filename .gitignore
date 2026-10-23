@@ -1,0 +1,22 @@
+# Editor / OS noise
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+
+# Dependencies and build output (the plugin ships plain JavaScript, so a
+# checkout needs no install or build step)
+node_modules/
+pnpm-lock.yaml
+dist/
+lib/
+*.tgz
+
+# Local scratch and logs
+.check/
+*.log
+
+# Agent / editor state
+.vscode/
+.idea/

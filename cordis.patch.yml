@@ -1,0 +1,6 @@
+# Bundle patch layer: one Host row loads this package's empty Host half, and the
+# `dsh.client` declaration in package.json makes the web app load `./client`.
+- insert:
+    - id: dsh-eye-care
+      name: dsh-eye-care
+      config: {}
