@@ -18,22 +18,33 @@
 
 ## 安装
 
-插件是纯 JavaScript，**没有构建步骤**，git 安装不需要批准任何 install 脚本。
+面向 DeepSeek Harness 桌面版（Web UI）。
 
-### 从 GitHub 安装（推荐锁 commit）
+1. 打开左侧边栏的 **Plugins**
+2. 点 **Add plugin**
+3. 在包名输入框里粘贴这一行（已锁定到发布版本，后续推送不会改变你装到的代码）：
 
-```sh
-dsh plugin --profile <你的 profile 名> add github:LvenxjY/dsh-eye-care#<commit-sha>
-```
+   ```
+   github:LvenxjY/dsh-eye-care#7453c79ce01f69db032743e410b92ffe30d1d5f1
+   ```
 
-把 `<commit-sha>` 换成仓库里的完整 40 位 commit 哈希。锁定 commit 后，之后的推送不会悄悄改变别人装到的代码。省略 `#<commit-sha>` 会装默认分支的最新提交。
+4. 点 **Install**，等待安装完成
 
-### 从 tarball 安装
+插件是纯 JavaScript，**没有构建步骤**，所以不会弹出任何"是否允许运行安装脚本"的确认。
 
-```sh
-pnpm pack            # 生成 dsh-eye-care-1.0.0.tgz
-dsh plugin --profile <profile> add ./dsh-eye-care-1.0.0.tgz
-```
+> 如果提示 **Cannot access GitHub**：说明当前网络连不上 GitHub。界面会提供 **Use mainland China mirror**，但镜像只能加速 npm 依赖，**无法替代 GitHub 仓库本身**——本插件直接来自 GitHub。遇到这个提示需要换用能访问 GitHub 的网络环境。
+
+### 安装后没反应？
+
+插件装好后应当立即生效。如果侧边栏没有变化，依次检查：
+
+1. **Plugins** 页面里是否出现了 `dsh-eye-care`，开关是否为开
+2. 刷新一次页面（`Ctrl+R`）
+3. 打开 `设置 → 通用`，确认有"护眼提醒"这一行
+
+### 版本要求
+
+需要 DeepSeek Harness `0.2.1-rc.2` 或更高（且低于 `0.3.0`）。低版本会在安装时被拒绝，并提示版本不兼容。
 
 ## 使用
 
@@ -51,9 +62,19 @@ dsh plugin --profile <profile> add ./dsh-eye-care-1.0.0.tgz
 
 偏好保存在浏览器 `localStorage` 的 `dsh-eye-care.settings.v1` 键下，按浏览器独立生效。
 
+## 卸载
+
+**Plugins** → 找到 `dsh-eye-care` → **Remove**。
+
+偏好设置独立于插件存在，卸载后会留在浏览器里；想彻底清干净，在开发者工具的 Console 里执行：
+
+```js
+localStorage.removeItem('dsh-eye-care.settings.v1')
+```
+
 ## 兼容性
 
-`engines.dsh` 声明为 `>=0.2.1-rc.2 <0.3.0-0`。DSH 在安装和启动时检查这个范围，版本不匹配会拒绝加载；其他 DSH 版本请自行测试后再放宽范围。
+`engines.dsh` 声明为 `>=0.2.1-rc.2 <0.3.0-0`。DSH 在安装和启动时检查这个范围，版本不匹配会拒绝加载。
 
 插件用到三个 slot：`shell.overlay`、`conversation.composer.dock`、`settings.general.item`。它们由 DSH 的 Web bundle 声明；缺少时插件不会强行改写其他 UI。
 
